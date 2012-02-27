@@ -76,7 +76,7 @@ class AirbrakeHandler(logging.Handler):
         self.environment = environment
         self.component_name = component_name
         self.node_name = node_name
-        self.work_queue = multiprocessing.JoinableQueue()
+        self.work_queue = multiprocessing.Queue()
         self.work_queue.cancel_join_thread()
         self.worker = AirbrakeSender(self.work_queue, timeout_in_ms, self._serviceUrl(airbrake_url, use_ssl))
         self.worker.start()
